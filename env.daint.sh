@@ -94,10 +94,11 @@ setCppEnvironment()
     # standard modules (part 1)
     module load cmake
     module unload gcc
-    module load gcc/4.8.2
+    module load gcc/4.9.3
     if [ "${target}" == "gpu" ] ; then
-        module load craype-accel-nvidia35
-        module swap cudatoolkit/7.0.28-1.0502.10742.5.1
+        module load cudatoolkit/7.0.28-1.0502.10742.5.1
+        module load cray-libsci_acc/3.3.0
+        module load cray-libsci/13.2.0
     fi
 
     # Fortran compiler specific modules and setup
@@ -153,8 +154,9 @@ unsetCppEnvironment()
 
     # remove standard modules (part 1)
     if [ "${target}" == "gpu" ] ; then
-        module unload craype-accel-nvidia35
-        module unload cudatoolkit
+        module load cray-libsci
+        module load cray-libsci_acc
+        module load cudatoolkit
     fi
     module unload gcc/4.8.2
     module load gcc
